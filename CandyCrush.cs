@@ -27,8 +27,8 @@ class Game {
        board[pointA.x][pointA.y] = board[pointB.x][pointB.y];
        board[pointB.x][pointB.y] = originalItemAtPointA;
        List<Match> matches = getMatches();
-       if (matches.length == 0) {
-           board[pointB.x][pointB.y] = board[pointA.x][pointA.y];
+       if (matches.length == 0) { //means no valid matches found, so cannot swap
+           board[pointB.x][pointB.y] = board[pointA.x][pointA.y]; //undo swap
            board[pointA.x][pointA.y] = originalItemAtPointA;
        }
        for (Match match in matches) {
@@ -84,7 +84,7 @@ board[matchPoint.x][index - 1];
        }
    }
 
-   List<Match> getMatches() {
+   List<Match> getMatches() { //get number of matches
        List<Match> foundMatches = new List<Match>();
        foundMatches.append(getHorizontalMatches());
        foundMatches.append(getVerticalMatches());
@@ -117,7 +117,7 @@ nextItem.color.isEqual(startingItem.color)) {
 
                    }else if(startingItem && nextItem &&
 !nextItem.color.isEqual(startingItem.color)){
-                       if (match.matchPoints.length >= 3) {
+                       if (match.matchPoints.length >= 3) { //original =3, only matches 3
                            foundMatches.append(match);
                        }
                        match = new Match();
@@ -131,7 +131,7 @@ nextItem.color.isEqual(startingItem.color)) {
                    }
                }
            }
-           if (match.matchPoints.length >= 3) {
+           if (match.matchPoints.length >= 3) { //original =3, only matches 3
                foundMatches.append(match);
            }
        }
@@ -152,5 +152,4 @@ http://bejeweled.popcap.com/html5 (Candy Crush)
 the solution to find the longest
 matches possible with a minimum of 3.
 
-3) Extend this to automatically drop gems (1) This implements a simple game. What is the name of the game, or if
-you don't know, how does the game work?
+3) Extend this to automatically drop gems into empty spots and prepare the board for the next play
